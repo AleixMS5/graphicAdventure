@@ -53,65 +53,71 @@ def executarSentenciesCommit(sentencia):
 
 
 def mostrarLcalitzacio():
-    try:
-        print('digues la id per buscar')
-        id = input()
-        executarSenencies("select * from localització where id ='" + id + "';")
+    while True:
+        try:
+            print('digues la id per buscar')
+            id = input()
+            executarSenencies("select * from localització where id ='" + id + "';")
 
+            break
 
-
-    except(Exception, psycopg2.DatabaseError) as error:
-        print(error)
+        except(Exception, psycopg2.DatabaseError) as error:
+            print("la id no coincideix")
 
 
 def eliminarlocalitzacio():
-    try:
-        print('digues la id per esborrar')
-        id = input()
+    while True:
+        try:
+            print('digues la id per esborrar')
+            id = input()
 
-        executarSentenciesCommit("delete from localització where id=' " + id + "';")
-
-    except(Exception, psycopg2.DatabaseError) as error:
-        print(error)
+            executarSentenciesCommit("delete from localització where id=' " + id + "';")
+            break
+        except(Exception, psycopg2.DatabaseError) as error:
+            print("les ids son camps numerics")
 
 
 def crearLocalitzacio():
-    try:
-        print("digues la descripció")
-        descripcio = input()
-        print("digues el nom ")
-        nom = input()
-        print("descriu les sortides")
-        sortides = input()
-        executarSentenciesCommit(
-            "insert into localització(descripcio,nom,sortides) values ('" + descripcio + "','" + nom + "','" + sortides + "')")
-
-    except(Exception, psycopg2.DatabaseError) as error:
-        print(error)
+    while True:
+        try:
+            print("digues la descripció")
+            descripcio = input()
+            print("digues el nom ")
+            nom = input()
+            print("descriu les sortides")
+            sortides = input()
+            executarSentenciesCommit(
+                "insert into localització(descripcio,nom,sortides) values ('" + descripcio + "','" + nom + "','" + sortides + "')")
+            break
+        except(Exception, psycopg2.DatabaseError) as error:
+            print(error)
 
 
 def modificarLocalitzacio():
-    try:
-        print('digues la id per modificar')
-        id = input()
-        print("digues la descripció")
-        descripcio = input()
-        print("digues el nom ")
-        nom = input()
-        print("descriu les sortides")
-        sortides = input()
-        executarSentenciesCommit(
-            "UPDATE localització SET descripcio='" + descripcio + "',nom='" + nom + "',sortides='" + sortides + "' WHERE id='" + id + "';")
-    except(Exception, psycopg2.DatabaseError) as error:
-        print(error)
+    while True:
+        try:
+            print('digues la id per modificar')
+            id = input()
+            print("digues la descripció")
+            descripcio = input()
+            print("digues el nom ")
+            nom = input()
+            print("descriu les sortides")
+            sortides = input()
+            executarSentenciesCommit(
+                "UPDATE localització SET descripcio='" + descripcio + "',nom='" + nom + "',sortides='" + sortides + "' WHERE id='" + id + "';")
+            break
+        except(Exception, psycopg2.DatabaseError) as error:
+            print(error)
 
 
 def llistarTots(taula):
-    try:
-        executarSenencies("select * from " + taula)
 
-    except(Exception, psycopg2.DatabaseError) as error:
-        print(error)
+        try:
+            executarSenencies("select * from " + taula)
+
+        except(Exception, psycopg2.DatabaseError) as error:
+            print("les ids son camps numerics")
 
 
 
@@ -142,71 +148,75 @@ def executarOpcioMenuLocalitzacions():
 
 
 def mostrarcamins():
-    try:
-        print("1:buscar per origen")
-        print("2:buscar per desti")
-        obcio = input()
+    while True:
+        try:
+            print("1:buscar per origen")
+            print("2:buscar per desti")
+            obcio = input()
 
-        if (obcio == "1"):
-            print('digues la id per buscar')
-            id = input()
-            executarSenencies("select * from camins where idor ='" + id + "';")
-        if (obcio == "2"):
-            print('digues la id per buscar')
-            id = input()
-            executarSenencies("select * from camins where iddest ='" + id + "';")
+            if (obcio == "1"):
+                print('digues la id per buscar')
+                id = input()
+                executarSenencies("select * from camins where idor ='" + id + "';")
+            if (obcio == "2"):
+                print('digues la id per buscar')
+                id = input()
+                executarSenencies("select * from camins where iddest ='" + id + "';")
 
-
-    except(Exception, psycopg2.DatabaseError) as error:
-        print(error)
+            break
+        except(Exception, psycopg2.DatabaseError) as error:
+            print("les ids no coincideixen amb cap cami")
 
 def crearcamins():
-    try:
-        print("digues la id dorigen")
-        id = input()
-        print("digues la id de desti ")
-        id2 = input()
-        print("digues el nom de l'origen")
-        origen = input()
-        print("digues el nom del desti")
-        desti = input()
-        executarSentenciesCommit(
-            "insert into camins (idor,iddest,nomorigen,nomdesti) values ('" + id+ "','" + id2 + "','" + origen + "','"+desti+"')")
-
-    except(Exception, psycopg2.DatabaseError) as error:
-        print(error)
+    while True:
+        try:
+            print("digues la id dorigen")
+            id = input()
+            print("digues la id de desti ")
+            id2 = input()
+            print("digues el nom de l'origen")
+            origen = input()
+            print("digues el nom del desti")
+            desti = input()
+            executarSentenciesCommit(
+                "insert into camins (idor,iddest,nomorigen,nomdesti) values ('" + id+ "','" + id2 + "','" + origen + "','"+desti+"')")
+            break
+        except(Exception, psycopg2.DatabaseError) as error:
+            print(error)
 
 
 def modificarcamins():
-    try:
-        print('digues la id dorigen per esborrar')
-        id0 = input()
-        print('digues la id de desti per esborrar')
-        id02 = input()
-        print("digues la id dorigen")
-        id = input()
-        print("digues la id de desti ")
-        id2 = input()
-        print("digues el nom de l'origen")
-        origen = input()
-        print("digues el nom del desti")
-        desti = input()
-        executarSentenciesCommit(
-            "update camins  SET idor='" + id + "' ,iddest ='" + id2 + "',nomorigen='" + origen + "',nomdesti='" + desti + "' where idor=' " + id0 + "' and iddest='"+id02+"';")
-
-    except(Exception, psycopg2.DatabaseError) as error:
-        print(error)
+    while True:
+        try:
+            print('digues la id dorigen per modificar')
+            id0 = input()
+            print('digues la id de desti per modificar')
+            id02 = input()
+            print("digues la id dorigen")
+            id = input()
+            print("digues la id de desti ")
+            id2 = input()
+            print("digues el nom de l'origen")
+            origen = input()
+            print("digues el nom del desti")
+            desti = input()
+            executarSentenciesCommit(
+                "update camins  SET idor='" + id + "' ,iddest ='" + id2 + "',nomorigen='" + origen + "',nomdesti='" + desti + "' where idor=' " + id0 + "' and iddest='"+id02+"';")
+            break
+        except(Exception, psycopg2.DatabaseError) as error:
+            print("les ids son camps numerics")
 def eliminarcamins():
-    try:
-        print('digues la id dorigen per esborrar')
-        id = input()
-        print('digues la id de desti per esborrar')
-        id2 = input()
+    while True:
+        try:
+            print('digues la id dorigen per esborrar')
+            id = input()
+            print('digues la id de desti per esborrar')
+            id2 = input()
 
-        executarSentenciesCommit("delete from camins where idor=' " + id + "' and iddest='"+id2+"';")
-
-    except(Exception, psycopg2.DatabaseError) as error:
-        print(error)
+            executarSentenciesCommit("delete from camins where idor=' " + id + "' and iddest='"+id2+"';")
+            break
+        except(Exception, psycopg2.DatabaseError) as error:
+            print("les ids son camps numerics")
 
 
 def executarOpcioMenucamins():
@@ -240,67 +250,73 @@ class  objecte:
         self.idLocalitzacio = idLocalitzacio
 
 def mostrarObjectes():
-    try:
+    while True:
+        try:
 
 
 
 
-        print('digues la id per buscar')
-        id = input()
-        executarSenencies("select * from objectes where id ='" + id + "';")
+            print('digues la id per buscar')
+            id = input()
+            executarSenencies("select * from objectes where id ='" + id + "';")
 
+            break
 
-
-    except(Exception, psycopg2.DatabaseError) as error:
-        print(error)
+        except(Exception, psycopg2.DatabaseError) as error:
+            print("la id no coincideix"
+                  "")
 
 def crearObjectes():
-    try:
-        print("digues la id ")
-        id = input()
-        print("digues el pes ")
-        pes = input()
-        print("digues el nom de l'objecte")
-        nom = input()
-        print("digues la descripció del objecte")
-        descripcio = input()
-        print("digues la id de l'origen")
-        idOrigen = input()
-        executarSentenciesCommit(
-            "insert into objectes VALUES  ('" +id+ "',('" + pes + "','" + nom + "','"+descripcio+"'),"+idOrigen+")")
-
-    except(Exception, psycopg2.DatabaseError) as error:
-        print(error)
+    while True:
+        try:
+            print("digues la id ")
+            id = input()
+            print("digues el pes ")
+            pes = input()
+            print("digues el nom de l'objecte")
+            nom = input()
+            print("digues la descripció del objecte")
+            descripcio = input()
+            print("digues la id de l'origen")
+            idOrigen = input()
+            executarSentenciesCommit(
+                "insert into objectes VALUES  ('" +id+ "',('" + pes + "','" + nom + "','"+descripcio+"'),"+idOrigen+")")
+            break
+        except(Exception, psycopg2.DatabaseError) as error:
+            print("les ids i el pes son camp numerics")
 
 
 def modificarObjectes():
-    try:
-        print("digues la id d'jecte per modificar")
-        id0 = input()
-        print("digues el pes de l'objecte")
-        pes = input()
-        print("digues el nom de l'objecte")
-        nom = input()
-        print("digues la descripció del objecte")
-        descripcio = input()
-        print("digues la id de l'origen")
-        idOrigen = input()
+    while True:
+        try:
+            print("digues la id d'jecte per modificar")
+            id0 = input()
+            print("digues el pes de l'objecte")
+            pes = input()
+            print("digues el nom de l'objecte")
+            nom = input()
+            print("digues la descripció del objecte")
+            descripcio = input()
+            print("digues la id de l'origen")
+            idOrigen = input()
 
-        executarSentenciesCommit(
-            "update objectes  SET  objecte.pes='"+pes+"', objecte.nom='"+nom+"', objecte.descripcio='"+descripcio+"', idlocalitzacio='"+idOrigen+"' where id='" + id0 + "' ;")
-
-    except(Exception, psycopg2.DatabaseError) as error:
-        print(error)
+            executarSentenciesCommit(
+                "update objectes  SET  objecte.pes='"+pes+"', objecte.nom='"+nom+"', objecte.descripcio='"+descripcio+"', idlocalitzacio='"+idOrigen+"' where id='" + id0 + "' ;")
+            break
+        except(Exception, psycopg2.DatabaseError) as error:
+            print("les ids i el pes son camp numerics")
 def eliminarObjectes():
-    try:
-        print('digues la id dorigen per esborrar')
-        id = input()
+    while True:
+        try:
+            print('digues la id dorigen per esborrar')
+            id = input()
 
 
-        executarSentenciesCommit("delete from objectes where id=" + id + ";")
+            executarSentenciesCommit("delete from objectes where id=" + id + ";")
+            break
+        except(Exception, psycopg2.DatabaseError) as error:
+            print("la id no existeix")
 
-    except(Exception, psycopg2.DatabaseError) as error:
-        print(error)
 
 
 def executarMenuObjectes():
@@ -325,14 +341,15 @@ def executarMenuObjectes():
         llistarTots("objectes")
 
 def mostrarProtagonista():
-    try:
 
-        executarSenencies("select * from protagonista ;")
+        try:
+
+            executarSenencies("select * from protagonista ;")
 
 
 
-    except(Exception, psycopg2.DatabaseError) as error:
-        print("no hi ha protagonista")
+        except(Exception, psycopg2.DatabaseError) as error:
+            print("no hi ha protagonista")
 
 def crearProtagonista():
     try:
